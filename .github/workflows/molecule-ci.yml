@@ -15,7 +15,7 @@ permissions:
   contents: read
 
 env:
-  ROLE_NAME: 
+  ROLE_NAME: "sample"
 
 jobs:
   molecule-setup-ci:
@@ -66,8 +66,8 @@ jobs:
 
       - name: Setup role and molecule scenario
         run: |
-          ansible-galaxy role init $role_name
-          cd $role_name
+          ansible-galaxy role init ${{ env.ROLE_NAME }}
+          cd ${{ env.ROLE_NAME }}
           molecule init scenario
 
 ...
