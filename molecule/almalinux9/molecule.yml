@@ -6,7 +6,7 @@ driver:
     name: virtualbox
 platforms:
   # Defaults to Alpine Linux in case no box details are provided
-  - name: Alma9
+  - name: AlmaLinux9
     box: almalinux/9
     box_version: "9.6.20250522"
     memory: 2048

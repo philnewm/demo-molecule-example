@@ -6,8 +6,8 @@ driver:
     name: virtualbox
 platforms:
   # Defaults to Alpine Linux in case no box details are provided
-  - name: Alma9
-    box: ubuntu/jammy649
+  - name: Ubuntu2204
+    box: ubuntu/jammy64
     box_version: "20241002.0.0"
     memory: 2048
     cpus: 2
