@@ -5,14 +5,21 @@
 
 - name: Install Apache web server
   become: true
+  when: ansible_os_family == "Debian"
+  ansible.builtin.apt:
+    cache_valid_time: 3600
+    update_cache: true
+
+- name: Install Apache web server
+  become: true
   ansible.builtin.package:
-    name: httpd
+    name: "{{ webserver_package[ansible_os_family] }}"
     state: present
 
 - name: Ensure Apache is started and enabled on boot
   become: true
   ansible.builtin.service:
-    name: "httpd"
+    name: "{{ webserver_package[ansible_os_family] }}"
     state: "started"
     enabled: true
 
@@ -22,7 +29,7 @@
     content: |
       <html>
       <body>
-        <h1>Welcome to Apache on AlmaLinux!</h1>
+        <h1>Welcome to Apache on {{ ansible_distribution }}!</h1>
       </body>
       </html>
     dest: /var/www/html/index.html
@@ -35,7 +42,7 @@
   become: true
   when: default_page.changed
   ansible.builtin.service:
-    name: httpd
+    name: "{{ webserver_package[ansible_os_family] }}"
     state: restarted
 
 - name: Display VM IP address

@@ -9,14 +9,14 @@
 - name: Test Apache package is installed
   ansible.builtin.assert:
     that:
-      - "'httpd' in ansible_facts.packages"
+      - webserver_package[ansible_os_family] in ansible_facts.packages
     fail_msg: "Apache package 'httpd' is not installed"
     quiet: true
 
 - name: Test Apache service is running
   ansible.builtin.assert:
     that:
-      - ansible_facts.services['httpd.service'].state == 'running'
+      - ansible_facts.services[webserver_package[ansible_os_family] + '.service'].state == 'running'
     fail_msg: "Apache service is not running"
     quiet: true
 

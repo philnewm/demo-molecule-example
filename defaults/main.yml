@@ -1,3 +1,7 @@
-#SPDX-License-Identifier: MIT-0
 ---
-# defaults file for molecule-example
+
+webserver_package:
+  RedHat: httpd
+  Debian: apache2
+
+...
